@@ -1,0 +1,13 @@
+select name_track,duration_track
+from tracks
+where duration_track = (select MAX(duration_track) from tracks)
+
+
+SELECT p.name_performer
+FROM performers p
+WHERE p.id_performer NOT IN (
+    SELECT ap.id_performer
+    FROM album_participants ap
+    LEFT JOIN albums a ON ap.id_album = a.id_album
+    WHERE a.release_year = 2020
+);
